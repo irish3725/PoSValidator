@@ -61,14 +61,12 @@ public class PoSValidator {
                 ex.printStackTrace();
             }
         }
-        System.out.print(contents);
-//        String input;
-//        if (args.length == 0) {
-//            input = "no input";
-//        } else {
-//            input = args[0];
-//        }
-//        System.out.println(input);
+        
+        ContentHandler c = new ContentHandler(contents);
+        c.test();
+//        System.out.print(contents);
+        
+        
     }
 
 }
