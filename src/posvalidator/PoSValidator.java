@@ -63,7 +63,7 @@ public class PoSValidator {
         }
         
         ContentHandler c = new ContentHandler(contents);
-        c.test();
+        
 //        System.out.print(contents);
         
         
