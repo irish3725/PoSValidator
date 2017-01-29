@@ -1,7 +1,7 @@
 ========================
 BUILD OUTPUT DESCRIPTION
 ========================
- 
+
 When you build an Java application project that has a main class, the IDE
 automatically copies all of the JAR
 files on the projects classpath to your projects dist/lib folder. The IDE
@@ -17,7 +17,7 @@ To distribute this project, zip up the dist folder (including the lib folder)
 and distribute the ZIP file.
 
 Notes:
- 
+
 * If two JAR files on the project classpath have the same name, only the first
 JAR file is copied to the lib folder.
 * Only JAR files are copied to the lib folder.
