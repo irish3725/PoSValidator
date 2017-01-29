@@ -63,7 +63,7 @@ public class PoSValidator {
         }
         
         ContentHandler c = new ContentHandler(contents);
-        
+        c.findTrack1();
 //        System.out.print(contents);
         
         
