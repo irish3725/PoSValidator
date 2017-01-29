@@ -23,17 +23,31 @@ public class PoSValidator {
 
         BufferedReader br = null;
         FileReader fr = null;
-        String FILENAME = "~/test.txt";
-
+        String FILENAME = "memorydump.dmp";
+        StringBuilder contents = new StringBuilder();
         try {
+
             fr = new FileReader(FILENAME);
             br = new BufferedReader(fr);
             String sCurrentLine;
             br = new BufferedReader(new FileReader(FILENAME));
             while ((sCurrentLine = br.readLine()) != null) {
-                System.out.println(sCurrentLine);
+//                String s = "foo";
+                byte[] bytes = sCurrentLine.getBytes();
+                StringBuilder binary = new StringBuilder();
+                for (byte b : bytes) {
+                    
+                    int val = b;
+                    for (int i = 0; i < 8; i++) {
+                        contents.append((val & 128) == 0 ? 0 : 1);
+                        binary.append((val & 128) == 0 ? 0 : 1);
+                        val <<= 1;
+                    }
+                }
+//                System.out.println(/*"'" + sCurrentLine + "' to binary: " + */binary);
+//                System.out.println(sCurrentLine);
             }
-        }  catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         } finally {
             try {
@@ -47,7 +61,7 @@ public class PoSValidator {
                 ex.printStackTrace();
             }
         }
-
+        System.out.print(contents);
 //        String input;
 //        if (args.length == 0) {
 //            input = "no input";
