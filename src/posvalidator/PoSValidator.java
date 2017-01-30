@@ -30,22 +30,10 @@ public class PoSValidator {
             fr = new FileReader(FILENAME);
             br = new BufferedReader(fr);
             String sCurrentLine;
-            br = new BufferedReader(new FileReader(FILENAME));
+            
+//            br = new BufferedReader(new FileReader(FILENAME));
             while ((sCurrentLine = br.readLine()) != null) {
-//                String s = "foo";
-                byte[] bytes = sCurrentLine.getBytes();
-                StringBuilder binary = new StringBuilder();
-                for (byte b : bytes) {
-                    
-                    int val = b;
-                    for (int i = 0; i < 8; i++) {
-                        contents.append((val & 128) == 0 ? 0 : 1);
-                        binary.append((val & 128) == 0 ? 0 : 1);
-                        val <<= 1;
-                    }
-                }
-//                System.out.println(/*"'" + sCurrentLine + "' to binary: " + */binary);
-//                System.out.println(sCurrentLine);
+                contents.append(sCurrentLine);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -61,13 +49,7 @@ public class PoSValidator {
                 ex.printStackTrace();
             }
         }
-        
         ContentHandler c = new ContentHandler(contents);
-        System.out.println("---------Forwards----------");
-        c.findTracks();
-        ContentHandler b = new ContentHandler(contents.reverse());
-        System.out.println("---------Backwards----------");
-        b.findTracks();
         
 //        System.out.print(contents);
         
