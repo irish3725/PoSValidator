@@ -63,7 +63,12 @@ public class PoSValidator {
         }
         
         ContentHandler c = new ContentHandler(contents);
+        System.out.println("---------Forwards----------");
         c.findTracks();
+        ContentHandler b = new ContentHandler(contents.reverse());
+        System.out.println("---------Backwards----------");
+        b.findTracks();
+        
 //        System.out.print(contents);
         
         

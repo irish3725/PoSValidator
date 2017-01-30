@@ -47,7 +47,7 @@ public class ContentHandler {
                 if (c == '%') {
                     i = findTrack1(i);
                 } else if (c == ';') {
-                    i = findTrack2(i);
+                    //i = findTrack2(i);
                 }
             }
         }
@@ -61,7 +61,7 @@ public class ContentHandler {
         StringBuilder exp = new StringBuilder();
         StringBuilder cvv = new StringBuilder();
         StringBuilder dd = new StringBuilder();
-        for (int i = index; i < index + 10000; i = i + 8) {
+        for (int i = index; i < content.length() - 8; i = i + 8) {
             int charVal = 0;
             for (int j = 0; j < 8; j++) {
                 if (content.charAt(i + j) == '1') {
@@ -71,10 +71,12 @@ public class ContentHandler {
             //if charVal is '?'
             if (charVal == 63) {
                 track1.append((char) charVal);
-                if(track1.charAt(1) == 'B'){
-                    addCard(track1);
+                if (track1.charAt(1) == 'B') {
+//                    addCard(track1);
                     System.out.println("Track 1: " + track1.toString());
                 }
+                return i;
+            } else if (track1.length() > 600) {
                 return i;
             } else {
                 track1.append((char) charVal);
@@ -83,10 +85,10 @@ public class ContentHandler {
 
         return index;
     }
-    
+
     public int findTrack2(int index) {
         StringBuilder track2 = new StringBuilder();
-        for (int i = index; i < index + 400; i = i + 8) {
+        for (int i = index; i < content.length() - 8; i = i + 8) {
             int charVal = 0;
             for (int j = 0; j < 8; j++) {
                 if (content.charAt(i + j) == '1') {
@@ -98,6 +100,8 @@ public class ContentHandler {
                 track2.append((char) charVal);
                 System.out.println("Track 2: " + track2.toString());
                 return i;
+            } else if (track2.length() > 400) {
+                return index;
             } else {
                 track2.append((char) charVal);
             }
@@ -108,10 +112,10 @@ public class ContentHandler {
 
     public void addCard(StringBuilder s) {
         Card[] temp = new Card[cards.length + 1];
-        for(int i = 0; i < cards.length; i++){
+        for (int i = 0; i < cards.length; i++) {
             temp[i] = cards[i];
         }
         temp[cards.length] = new Card(s);
     }
-    
+
 }
