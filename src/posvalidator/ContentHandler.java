@@ -23,8 +23,8 @@ public class ContentHandler {
 
     public void findTracks() {
         for (int i = 0; i < content.length(); i++){
-            if(content.charAt(i) == '%') {
-                
+            if(content.charAt(i) == '%' && content.charAt(i+1) == 'B') {
+                i = findTrack1(i);
             }
         }
     }
@@ -35,8 +35,9 @@ public class ContentHandler {
             if(content.charAt(i) == '?'){
                 track1.append(content.charAt(i));
                 System.out.println("Track 1: " + track1.toString());
+                addCard(track1);
                 return i + 1;
-            } else if (i > index + 50) {
+            } else if (i > index + 100) {
                 return index + 1;
             } else {
                 track1.append(content.charAt(i));
@@ -52,6 +53,15 @@ public class ContentHandler {
             temp[i] = cards[i];
         }
         temp[cards.length] = new Card(s);
+    }
+    
+    public void printCards() {
+        System.out.println("There is " + cards.length + " piece of credit "
+                + "card information in the memory data!");
+        for (int i = 0; i < cards.length; i++) {
+            System.out.println("<Information of credit card " + i + ">:");
+            cards[i].printCard();
+        }
     }
 
 }

@@ -26,12 +26,9 @@ public class PoSValidator {
         String FILENAME = "memorydump.dmp";
         StringBuilder contents = new StringBuilder();
         try {
-
             fr = new FileReader(FILENAME);
             br = new BufferedReader(fr);
             String sCurrentLine;
-            
-//            br = new BufferedReader(new FileReader(FILENAME));
             while ((sCurrentLine = br.readLine()) != null) {
                 contents.append(sCurrentLine);
             }
@@ -50,7 +47,8 @@ public class PoSValidator {
             }
         }
         ContentHandler c = new ContentHandler(contents);
-        
+        c.findTracks();
+        c.printCards();
 //        System.out.print(contents);
         
         
