@@ -15,12 +15,13 @@ import java.util.Queue;
 public class ContentHandler {
 
     private StringBuilder content;
+    private Card[] cards = new Card[0];
 
     public ContentHandler(StringBuilder s) {
         content = s;
     }
 
-    public void findTrack1() {
+    public void findTracks() {
         //start checking each bit
         for (int i = 0; i < content.length() - 8; i++) {
             //if bit is 1, the following byte cannot be a character
@@ -44,7 +45,9 @@ public class ContentHandler {
 //                System.out.println("bin: " + character.toString() + "   dec: "
 //                        + charVal + " char: " + c);
                 if (c == '%') {
-                    findTrack1(i);
+                    i = findTrack1(i);
+                } else if (c == ';') {
+                    i = findTrack2(i);
                 }
             }
         }
@@ -52,6 +55,12 @@ public class ContentHandler {
 
     public int findTrack1(int index) {
         StringBuilder track1 = new StringBuilder();
+        StringBuilder PAN = new StringBuilder();
+        StringBuilder fName = new StringBuilder();
+        StringBuilder lName = new StringBuilder();
+        StringBuilder exp = new StringBuilder();
+        StringBuilder cvv = new StringBuilder();
+        StringBuilder dd = new StringBuilder();
         for (int i = index; i < index + 10000; i = i + 8) {
             int charVal = 0;
             for (int j = 0; j < 8; j++) {
@@ -60,16 +69,49 @@ public class ContentHandler {
                 }
             }
             //if charVal is '?'
-            if(charVal == 63){
-                track1.append((char)charVal);
-                System.out.println(track1.toString());
-                break;
+            if (charVal == 63) {
+                track1.append((char) charVal);
+                if(track1.charAt(1) == 'B'){
+                    addCard(track1);
+                    System.out.println("Track 1: " + track1.toString());
+                }
+                return i;
             } else {
-                track1.append((char)charVal);
+                track1.append((char) charVal);
             }
         }
-        
-        return 0;
+
+        return index;
+    }
+    
+    public int findTrack2(int index) {
+        StringBuilder track2 = new StringBuilder();
+        for (int i = index; i < index + 400; i = i + 8) {
+            int charVal = 0;
+            for (int j = 0; j < 8; j++) {
+                if (content.charAt(i + j) == '1') {
+                    charVal = charVal + (int) pow(2, 7 - j);
+                }
+            }
+            //if charVal is '?'
+            if (charVal == 63) {
+                track2.append((char) charVal);
+                System.out.println("Track 2: " + track2.toString());
+                return i;
+            } else {
+                track2.append((char) charVal);
+            }
+        }
+
+        return index;
     }
 
+    public void addCard(StringBuilder s) {
+        Card[] temp = new Card[cards.length + 1];
+        for(int i = 0; i < cards.length; i++){
+            temp[i] = cards[i];
+        }
+        temp[cards.length] = new Card(s);
+    }
+    
 }
