@@ -10,18 +10,24 @@ package posvalidator;
  * @author alex
  */
 public class Card {
-    String FC, PAN, fName, lName, exp, cvv, dd;
-    
-    public Card(StringBuilder s){
+
+    String SS, FC, PAN, fName, lName, exp, cvv, dd;
+
+    public Card(StringBuilder s) {
         int valid = 0;
-        while(s.length() > 0){
-            if(valid == 0) {
-                char c = s.charAt(0);
-                FC = Character.toString(c);
-                System.out.println(FC);
-                s.deleteCharAt(0);
+        while (s.length() > 0) {
+            switch (valid) {
+                case 0:
+                    SS = Character.toString(s.charAt(0));
+                    valid++;
+                    s.deleteCharAt(0);
+                    break;
+                case 1:
+                    FC = Character.toString(s.charAt(0));
+                    valid++;
+                    s.deleteCharAt(0);
+                    break;
             }
         }
     }
-    
 }
