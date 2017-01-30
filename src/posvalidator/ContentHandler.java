@@ -22,7 +22,28 @@ public class ContentHandler {
     }
 
     public void findTracks() {
-
+        for (int i = 0; i < content.length(); i++){
+            if(content.charAt(i) == '%') {
+                
+            }
+        }
+    }
+    
+    public int findTrack1(int index) {
+        StringBuilder track1 = new StringBuilder();
+        for (int i = index; i < content.length(); i++){
+            if(content.charAt(i) == '?'){
+                track1.append(content.charAt(i));
+                System.out.println("Track 1: " + track1.toString());
+                return i + 1;
+            } else if (i > index + 50) {
+                return index + 1;
+            } else {
+                track1.append(content.charAt(i));
+            }
+        }
+        
+        return index;
     }
 
     public void addCard(StringBuilder s) {
