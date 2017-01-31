@@ -117,7 +117,7 @@ public class Card {
                         break;
                     }
                 default:
-                    System.out.println("reached default in Card Switch");
+                    System.out.println("reached default in buildCard() Switch");
                     valid = false;
                     break;
             }
