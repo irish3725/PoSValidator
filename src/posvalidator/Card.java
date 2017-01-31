@@ -16,6 +16,10 @@ public class Card {
     boolean valid = true;
 
     public Card(StringBuilder s) {
+        buildCard(s);
+    }
+    
+    public void buildCard(StringBuilder s) {
         int count = 0;
         while (s.length() > 0 && valid) {
             switch (count) {
@@ -68,7 +72,7 @@ public class Card {
                         name.append(s.charAt(0));
                         s.deleteCharAt(0);
                     }
-                    fName = name.toString();
+                    lName = name.toString();
                     s.deleteCharAt(0);
                     count++;
                     break;

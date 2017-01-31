@@ -48,11 +48,13 @@ public class ContentHandler {
     }
 
     public void addCard(StringBuilder s) {
-        Card[] temp = new Card[cards.length + 1];
-        for (int i = 0; i < cards.length; i++) {
-            temp[i] = cards[i];
-        }
-        temp[cards.length] = new Card(s);
+        Card card = new Card(s);
+        card.printCard();
+//        Card[] temp = new Card[cards.length + 1];
+//        for (int i = 0; i < cards.length; i++) {
+//            temp[i] = cards[i];
+//        }
+//        temp[cards.length] = new Card(s);
     }
     
     public void printCards() {
